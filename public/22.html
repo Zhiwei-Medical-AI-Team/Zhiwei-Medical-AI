@@ -484,7 +484,7 @@
         <!-- 右侧按钮区域 -->
         <div class="dd">
             <button class="my-button" onclick="showInstructions()">使用说明</button>
-            <button class="my-button" onclick="startNewChat()">重新开始对话</button>
+            <button class="my-button" onclick="redirectToPage()">重新开始对话</button>
             <button class="my-button" onclick="redirectToPage()">跳转到新页面</button>
             <button class="my-button" onclick="redirectToPage()">跳转到新页面</button>
         </div>
@@ -742,21 +742,6 @@
                 // Focus the input field when the page loads
                 messageInput.focus();
             });
-
-            // Function to start a new chat
-            function startNewChat() {
-                const conversationContainer = document.getElementById('conversation');
-                // 获取初始消息
-                const initialMessage = conversationContainer.querySelector('.ai-message');
-                // 清空聊天记录，但保留初始消息
-                conversationContainer.innerHTML = '';
-                if (initialMessage) {
-                    conversationContainer.appendChild(initialMessage);
-                } else {
-                    // 如果没有初始消息，重新添加
-                    addMessage("您好！我是医疗AI助手，请问有什么可以帮助您的？", 'ai');
-                }
-            }
         </script>
     </div>
 </body>
