@@ -87,6 +87,53 @@
             color: #333;
         }
 
+        /* 引用之前的问题弹窗样式 */
+        #previous-questions-modal .modal-content {
+            background: #ffffff;
+            width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 24px;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        #previous-questions-modal h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #previous-questions-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #previous-questions-list li {
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        #previous-questions-list li:last-child {
+            border-bottom: none;
+        }
+
+        #previous-questions-list li:hover {
+            background-color: #e0e0e0;
+        }
+
+        #previous-questions-list li:active {
+            background-color: #d0d0d0;
+        }
+
+
         /* 其他样式保持不变 */
         /* ...（省略其他样式代码）... */
         /* 标题样式 */
@@ -485,7 +532,7 @@
         <div class="dd">
             <button class="my-button" onclick="showInstructions()">使用说明</button>
             <button class="my-button" onclick="startNewChat()">重新开始对话</button>
-            <button class="my-button" onclick="redirectToPage()">跳转到新页面</button>
+            <button class="my-button" onclick="showPreviousQuestions()">引用之前的问题</button>
             <button class="my-button" onclick="redirectToPage()">跳转到新页面</button>
         </div>
 
@@ -517,6 +564,16 @@
                 <p><strong>2：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
                 <p><strong>3：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
                 <p><strong>4：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
+            </div>
+        </div>
+        <!-- 引用之前的问题弹窗 -->
+        <div id="previous-questions-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closePreviousQuestionsModal()">&times;</span>
+                <h3>之前的问题(点击即可)</h3>
+                <ul id="previous-questions-list">
+                    <!-- 之前的问题将动态添加到这里 -->
+                </ul>
             </div>
         </div>
 
@@ -608,6 +665,32 @@
             }
         </script>
         <script>
+            // 引用之前的问题弹窗功能
+            let previousQuestions = [];
+
+            function showPreviousQuestions() {
+                const modal = document.getElementById('previous-questions-modal');
+                const list = document.getElementById('previous-questions-list');
+                list.innerHTML = ''; // 清空之前的内容
+
+                // 添加之前的问题到列表
+                previousQuestions.forEach((question, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = question;
+                    li.onclick = () => {
+                        document.getElementById('message-input').value = question;
+                        closePreviousQuestionsModal();
+                    };
+                    list.appendChild(li);
+                });
+
+                modal.style.display = 'flex';
+            }
+
+            function closePreviousQuestionsModal() {
+                const modal = document.getElementById('previous-questions-modal');
+                modal.style.display = 'none';
+            }
             // Main JavaScript for the chat functionality
             document.addEventListener('DOMContentLoaded', function () {
                 // Get DOM elements
@@ -644,6 +727,9 @@
                 function sendMessage() {
                     const messageText = messageInput.value.trim();
                     if (messageText === '') return;
+
+                    // 将用户的问题存储到之前的问题列表中
+                    previousQuestions.push(messageText);
 
                     // Add user message to conversation
                     addMessage(messageText, 'user');
