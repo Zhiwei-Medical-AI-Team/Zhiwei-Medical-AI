@@ -485,7 +485,7 @@
         <div class="dd">
             <button class="my-button" onclick="showInstructions()">使用说明</button>
             <button class="my-button" onclick="startNewChat()">重新开始对话</button>
-            <button class="my-button" onclick="redirectToPage()">跳转到新页面</button>
+            <button class="my-button" onclick="showPreviousQuestions()">引用之前的问题</button>
             <button class="my-button" onclick="redirectToPage()">跳转到新页面</button>
         </div>
 
@@ -517,6 +517,16 @@
                 <p><strong>2：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
                 <p><strong>3：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
                 <p><strong>4：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
+            </div>
+        </div>
+        <!-- 引用之前的问题弹窗 -->
+        <div id="previous-questions-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closePreviousQuestionsModal()">&times;</span>
+                <h3>之前的问题</h3>
+                <ul id="previous-questions-list">
+                    <!-- 之前的问题将动态添加到这里 -->
+                </ul>
             </div>
         </div>
 
@@ -608,6 +618,34 @@
             }
         </script>
         <script>
+            // 引用之前的问题弹窗功能
+            let previousQuestions = [];
+
+            function showPreviousQuestions() {
+                const modal = document.getElementById('previous-questions-modal');
+                const list = document.getElementById('previous-questions-list');
+                list.innerHTML = ''; // 清空之前的内容
+
+                // 添加之前的问题到列表
+                previousQuestions.forEach((question, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = question;
+                    li.style.cursor = 'pointer';
+                    li.style.marginBottom = '10px';
+                    li.onclick = () => {
+                        document.getElementById('message-input').value = question;
+                        closePreviousQuestionsModal();
+                    };
+                    list.appendChild(li);
+                });
+
+                modal.style.display = 'flex';
+            }
+
+            function closePreviousQuestionsModal() {
+                const modal = document.getElementById('previous-questions-modal');
+                modal.style.display = 'none';
+            }
             // Main JavaScript for the chat functionality
             document.addEventListener('DOMContentLoaded', function () {
                 // Get DOM elements
@@ -644,6 +682,9 @@
                 function sendMessage() {
                     const messageText = messageInput.value.trim();
                     if (messageText === '') return;
+
+                    // 将用户的问题存储到之前的问题列表中
+                    previousQuestions.push(messageText);
 
                     // Add user message to conversation
                     addMessage(messageText, 'user');
