@@ -164,7 +164,7 @@
             background: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            color: #dcddde;
+            color: #000000;
             font-size: 14px;
             transition: all 0.2s;
         }
@@ -533,7 +533,7 @@
             <button class="my-button" onclick="showInstructions()">使用说明</button>
             <button class="my-button" onclick="startNewChat()">重新开始对话</button>
             <button class="my-button" onclick="showPreviousQuestions()">引用之前的问题</button>
-            <button class="my-button" onclick="redirectToPage()">跳转到新页面</button>
+            <button class="my-button" onclick="redirectToLastQuestion()">重新回答该问题</button>
         </div>
 
         <!-- 问答弹窗 -->
@@ -842,6 +842,30 @@
                     // 如果没有初始消息，重新添加
                     addMessage("您好！我是医疗AI助手，请问有什么可以帮助您的？", 'ai');
                 }
+            }
+            // 重新回答最后一个问题
+            function redirectToLastQuestion() {
+                if (previousQuestions.length === 0) {
+                    alert('暂无历史问题可供重新回答');
+                    return;
+                }
+
+                // 获取最后一个问题
+                const lastQuestion = previousQuestions[previousQuestions.length - 1];
+
+                // 创建并触发发送事件
+                const inputEvent = new Event('input', { bubbles: true });
+                const sendEvent = new Event('click', { bubbles: true });
+
+                // 设置输入框内容
+                const messageInput = document.getElementById('message-input');
+                messageInput.value = lastQuestion;
+
+                // 触发输入事件更新状态
+                messageInput.dispatchEvent(inputEvent);
+
+                // 触发发送按钮点击
+                document.getElementById('send-button').dispatchEvent(sendEvent);
             }
         </script>
     </div>
