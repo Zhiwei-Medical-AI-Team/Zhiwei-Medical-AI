@@ -236,7 +236,7 @@
 
         .chat-container {
             float: left;
-            width: 60%;
+            width: 63%;
             max-width: 1100px;
             margin: 40px auto;
             display: flex;
@@ -281,37 +281,46 @@
         }
 
 
-        body .dd {
+        /* 右侧按钮容器 */
+        .dd {
             float: right;
             margin-top: 40px;
             width: 20%;
             height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* 统一按钮样式 */
         .my-button {
             background: linear-gradient(135deg, #6e8efb, #a777e3);
-            /* 绿色背景 */
             color: white;
-            /* 白色文字 */
-            padding: 15px 32px;
-            /* 内边距 */
+            padding: 20px 32px;
             text-align: center;
-            /* 文字居中 */
             text-decoration: none;
-            /* 去掉下划线 */
             display: inline-block;
-            /* 行内块元素 */
             font-size: 16px;
-            /* 字体大小 */
-            margin: 4px 2px;
-            /* 外边距 */
+            margin: 42px 2px;
             cursor: pointer;
-            /* 鼠标指针样式 */
             border: none;
-            /* 去掉边框 */
             border-radius: 8px;
-            /* 圆角 */
-            margin-top: 50px;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        /* 按钮悬停效果 */
+        .my-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 按钮点击效果 */
+        .my-button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         /* Header section styling */
@@ -482,15 +491,19 @@
 
         /* Responsiveness for mobile devices */
         @media (max-width: 768px) {
-            .chat-container {
-                margin: 0;
-                height: 100vh;
-                border-radius: 0;
+            .dd {
+                width: 100%;
+                float: none;
+                margin-top: 20px;
+                height: auto;
             }
 
-            .message {
-                max-width: 90%;
+            .my-button {
+                width: 90%;
+                max-width: none;
+                margin-top: 15px;
             }
+        }
     </style>
 </head>
 
@@ -867,6 +880,7 @@
                 // 触发发送按钮点击
                 document.getElementById('send-button').dispatchEvent(sendEvent);
             }
+
         </script>
     </div>
 </body>
