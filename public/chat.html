@@ -350,6 +350,38 @@
       text-align: center;
       font-size: 1.5rem;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .header-button {
+      position: absolute;
+      left: 20px;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 25px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-button:hover {
+      background: linear-gradient(135deg, #5a7de6, #8f5fd8);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .header-button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     /* Conversation area styling */
@@ -546,6 +578,9 @@
     <!-- 聊天容器 -->
     <div class="chat-container">
       <div class="chat-header">
+        <button class="header-button" onclick="redirectToSomePage()">
+          <i class="fas fa-arrow-left"></i> 返回
+        </button>
         和“智微医道”对话
       </div>
       <div class="conversation-container" id="conversation">
@@ -706,6 +741,9 @@
       }
     </script>
     <script>
+      function redirectToSomePage() {
+        window.location.href = 'index.html';
+      }
       // 引用之前的问题弹窗功能
       let previousQuestions = [];
 
