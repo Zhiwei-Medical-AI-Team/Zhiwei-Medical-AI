@@ -244,53 +244,6 @@
       background: #2d7cc7;
     }
 
-    /* 按钮容器样式 */
-    .button-container {
-      display: flex;
-      gap: 20px;
-      /* 按钮之间的间距 */
-      justify-content: center;
-      /* 按钮居中 */
-      margin-top: 20px;
-      /* 上边距 */
-    }
-
-    /* “是”按钮样式 */
-    .btn-yes {
-      background-color: #494fb6;
-      /* 绿色 */
-      color: white;
-    }
-
-    /* “否”按钮样式 */
-    .btn-no {
-      background-color: #6f00bf;
-      /* 红色 */
-      color: white;
-    }
-
-    /* 按钮悬停效果 */
-    .btn-yes:hover {
-      background-color: #417bd9;
-      /* 深绿色 */
-    }
-
-    .btn-no:hover {
-      background-color: #6d3fe1;
-      /* 深红色 */
-    }
-
-    /* 按钮点击效果 */
-    .btn-yes:active {
-      background-color: #388e3c;
-      /* 更深的绿色 */
-    }
-
-    .btn-no:active {
-      background-color: #b71c1c;
-      /* 更深的红色 */
-    }
-
     /* * {
       margin: 0;
       padding: 0;
@@ -708,7 +661,7 @@
       const questions = [
         { title: "第1题：", text: "请填写你的年龄" },
         { title: "第2题：", text: "请填写你的性别" },
-        { title: "第3题：", text: "你是否有过敏史或者病史", type: "button" }, // 添加 type 字段
+        { title: "第3题：", text: "你是否有过敏史或者病史" },
         { title: "第4题：", text: "请填写你的过敏史或者病史" },
         { title: "第5题：", text: "感谢参与！" }
       ];
@@ -729,45 +682,7 @@
         const question = questions[currentQuestionIndex];
         questionTitle.textContent = question.title;
         questionText.textContent = question.text;
-
-        // 清空输入区域
-        const inputGroup = document.querySelector('.input-group');
-        inputGroup.innerHTML = '';
-
-        if (question.type === "button") {
-          // 创建容器来包裹按钮
-          const buttonContainer = document.createElement('div');
-          buttonContainer.className = 'button-container'; // 添加样式类
-
-          // 创建“是”按钮
-          const yesButton = document.createElement('button');
-          yesButton.textContent = "是";
-          yesButton.className = "dialog-btn btn-yes"; // 添加样式类
-          yesButton.onclick = () => handleButtonClick(true);
-
-          // 创建“否”按钮
-          const noButton = document.createElement('button');
-          noButton.textContent = "否";
-          noButton.className = "dialog-btn btn-no"; // 添加样式类
-          noButton.onclick = () => handleButtonClick(false);
-
-          // 将按钮添加到容器中
-          buttonContainer.appendChild(yesButton);
-          buttonContainer.appendChild(noButton);
-
-          // 将按钮容器添加到输入区域
-          inputGroup.appendChild(buttonContainer);
-        } else {
-          // 如果是普通问题，生成输入框
-          const input = document.createElement('input');
-          input.type = "text";
-          input.className = "answer-input";
-          input.id = "answerInput";
-          input.placeholder = "请输入你的回答...";
-          input.value = userAnswers[currentQuestionIndex] || "";
-
-          inputGroup.appendChild(input);
-        }
+        answerInput.value = userAnswers[currentQuestionIndex] || "";
 
         // 更新按钮状态
         prevButton.disabled = currentQuestionIndex === 0;
@@ -776,31 +691,15 @@
 
         // 最后一题隐藏输入框
         if (currentQuestionIndex === questions.length - 1) {
-          inputGroup.style.display = 'none';
+          answerInput.style.display = 'none';
         } else {
-          inputGroup.style.display = 'block';
+          answerInput.style.display = 'block';
         }
-      }
-      function handleButtonClick(hasAllergy) {
-        userAnswers[currentQuestionIndex] = hasAllergy ? "是" : "否";
-
-        if (!hasAllergy) {
-          // 如果用户选择“否”，跳过第四个问题
-          currentQuestionIndex++; // 直接跳到第五个问题
-        }
-
-        goToNextQuestion();
       }
 
       // 下一步逻辑
       function goToNextQuestion() {
-        if (questions[currentQuestionIndex].type !== "button") {
-          // 如果是普通问题，保存用户输入
-          const input = document.getElementById('answerInput');
-          if (input) {
-            userAnswers[currentQuestionIndex] = input.value;
-          }
-        }
+        userAnswers[currentQuestionIndex] = answerInput.value;
 
         if (currentQuestionIndex < questions.length - 1) {
           currentQuestionIndex++;
@@ -813,14 +712,7 @@
 
       // 上一步逻辑
       function goToPreviousQuestion() {
-        if (questions[currentQuestionIndex].type !== "button") {
-          // 如果是普通问题，保存用户输入
-          const input = document.getElementById('answerInput');
-          if (input) {
-            userAnswers[currentQuestionIndex] = input.value;
-          }
-        }
-
+        userAnswers[currentQuestionIndex] = answerInput.value;
         if (currentQuestionIndex > 0) {
           currentQuestionIndex--;
           updateQuestion();
