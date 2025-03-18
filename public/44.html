@@ -659,11 +659,11 @@
     <script>
       // 问题数据
       const questions = [
-        { title: "第1题：", text: "请填写你的年龄" },
-        { title: "第2题：", text: "请填写你的性别" },
-        { title: "第3题：", text: "你是否有过敏史或者病史" },
-        { title: "第4题：", text: "请填写你的过敏史或者病史" },
-        { title: "第5题：", text: "感谢参与！" }
+        { title: "第1题：", text: "请输入您的年龄" },
+        { title: "第2题：", text: "请填写您的性别" },
+        { title: "第3题：", text: "请描述您的症状" },
+        { title: "第4题：", text: "请填写您的过敏史或者病史" },
+        // { title: "第5题：", text: "感谢参与！" }
       ];
 
       let currentQuestionIndex = 0; // 当前问题索引
@@ -691,7 +691,7 @@
 
         // 最后一题隐藏输入框
         if (currentQuestionIndex === questions.length - 1) {
-          answerInput.style.display = 'none';
+          answerInput.style.display = 'block';
         } else {
           answerInput.style.display = 'block';
         }
