@@ -1,3 +1,4 @@
+<!-- 848行为聊天头像 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -411,6 +412,7 @@
             align-self: flex-start;
         }
 
+        /* 删除或注释掉以下样式 */
         .avatar {
             width: 40px;
             height: 40px;
@@ -841,7 +843,16 @@
 
                     const avatarElement = document.createElement('div');
                     avatarElement.classList.add('avatar', `${sender}-avatar`);
-                    avatarElement.textContent = sender === 'user' ? 'U' : 'AI';
+
+                    // 创建图片元素
+                    const imgElement = document.createElement('img');
+                    imgElement.src = sender === 'user' ? 'image/logo.jpg' : 'image/logo.jpg';
+                    imgElement.alt = sender === 'user' ? 'User Avatar' : 'AI Avatar';
+                    imgElement.style.width = '40px';
+                    imgElement.style.height = '40px';
+                    imgElement.style.borderRadius = '50%';
+
+                    avatarElement.appendChild(imgElement);
 
                     const contentElement = document.createElement('div');
                     contentElement.classList.add('message-content');
