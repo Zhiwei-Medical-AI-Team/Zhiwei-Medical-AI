@@ -13,6 +13,10 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         /* 弹窗遮罩层样式 */
@@ -87,6 +91,65 @@
             color: #333;
         }
 
+        /* 引用之前的问题弹窗样式 */
+        #previous-questions-modal .modal-content {
+            background: #ffffff;
+            width: 500px;
+            max-height: 80vh;
+            /* 设置最大高度为视口的80% */
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 24px;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+            overflow: hidden;
+            /* 隐藏内部溢出内容 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #previous-questions-modal h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #previous-questions-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            /* 启用垂直滚动条 */
+            max-height: 60vh;
+            /* 设置列表的最大高度 */
+            flex: 1;
+            /* 使列表占据剩余空间 */
+        }
+
+        #previous-questions-list li {
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        #previous-questions-list li:last-child {
+            border-bottom: none;
+        }
+
+        #previous-questions-list li:hover {
+            background-color: #e0e0e0;
+        }
+
+        #previous-questions-list li:active {
+            background-color: #d0d0d0;
+        }
+
+
         /* 其他样式保持不变 */
         /* ...（省略其他样式代码）... */
         /* 标题样式 */
@@ -117,7 +180,7 @@
             background: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            color: #dcddde;
+            color: #000000;
             font-size: 14px;
             transition: all 0.2s;
         }
@@ -180,16 +243,16 @@
             background: #2d7cc7;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        /* * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    } */
 
         .chat-container {
             float: left;
-            width: 60%;
+            width: 63%;
             max-width: 1100px;
             margin: 40px auto;
             display: flex;
@@ -220,51 +283,63 @@
         }
 
         .aa {
-            /* background-color: red; */
-            height: 900px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
         }
 
         .bb {
-            float: left;
-            margin-top: 250px;
-
-            /* background-color: black; */
-            max-width: 20%;
-            height: 500px;
-        }
-
-
-        body .dd {
-            float: right;
-            margin-top: 40px;
             width: 20%;
-            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        .bb img {
+            max-width: 100%;
+            height: auto;
+        }
+
+
+        /* 右侧按钮容器 */
+        .dd {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 40px;
+        }
+
+        /* 统一按钮样式 */
         .my-button {
             background: linear-gradient(135deg, #6e8efb, #a777e3);
-            /* 绿色背景 */
             color: white;
-            /* 白色文字 */
-            padding: 15px 32px;
-            /* 内边距 */
+            padding: 20px 32px;
             text-align: center;
-            /* 文字居中 */
             text-decoration: none;
-            /* 去掉下划线 */
             display: inline-block;
-            /* 行内块元素 */
             font-size: 16px;
-            /* 字体大小 */
-            margin: 4px 2px;
-            /* 外边距 */
+            margin: 15px 0;
             cursor: pointer;
-            /* 鼠标指针样式 */
             border: none;
-            /* 去掉边框 */
             border-radius: 8px;
-            /* 圆角 */
-            margin-top: 50px;
+            width: 80%;
+            max-width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        /* 按钮悬停效果 */
+        .my-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 按钮点击效果 */
+        .my-button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         /* Header section styling */
@@ -275,6 +350,38 @@
             text-align: center;
             font-size: 1.5rem;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-button {
+            position: absolute;
+            left: 20px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-button:hover {
+            background: linear-gradient(135deg, #5a7de6, #8f5fd8);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .header-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         /* Conversation area styling */
@@ -435,15 +542,28 @@
 
         /* Responsiveness for mobile devices */
         @media (max-width: 768px) {
-            .chat-container {
-                margin: 0;
-                height: 100vh;
-                border-radius: 0;
+            .aa {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .message {
-                max-width: 90%;
+            .bb,
+            .dd {
+                width: 100%;
+                margin-top: 20px;
             }
+
+            .chat-container {
+                width: 100%;
+                margin: 20px 0;
+            }
+
+            .my-button {
+                width: 90%;
+                max-width: none;
+                /* margin-top: 15px; */
+            }
+        }
     </style>
 </head>
 
@@ -458,6 +578,9 @@
         <!-- 聊天容器 -->
         <div class="chat-container">
             <div class="chat-header">
+                <button class="header-button" onclick="redirectToSomePage()">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
                 和“智微医道”对话
             </div>
             <div class="conversation-container" id="conversation">
@@ -484,9 +607,10 @@
         <!-- 右侧按钮区域 -->
         <div class="dd">
             <button class="my-button" onclick="showInstructions()">使用说明</button>
+            <button class="my-button" onclick="abcde()">返回资料填写</button>
             <button class="my-button" onclick="startNewChat()">重新开始对话</button>
             <button class="my-button" onclick="showPreviousQuestions()">引用之前的问题</button>
-            <button class="my-button" onclick="redirectToPage()">跳转到新页面</button>
+            <button class="my-button" onclick="redirectToLastQuestion()">重新回答该问题</button>
         </div>
 
         <!-- 问答弹窗 -->
@@ -523,7 +647,7 @@
         <div id="previous-questions-modal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closePreviousQuestionsModal()">&times;</span>
-                <h3>之前的问题（点击即可）</h3>
+                <h3>之前的问题(点击即可)</h3>
                 <ul id="previous-questions-list">
                     <!-- 之前的问题将动态添加到这里 -->
                 </ul>
@@ -618,6 +742,12 @@
             }
         </script>
         <script>
+            function redirectToSomePage() {
+                window.location.href = 'index.html';
+            }
+            function abcde() {
+                window.location.href = '33.html';
+            }
             // 引用之前的问题弹窗功能
             let previousQuestions = [];
 
@@ -630,8 +760,6 @@
                 previousQuestions.forEach((question, index) => {
                     const li = document.createElement('li');
                     li.textContent = question;
-                    li.style.cursor = 'pointer';
-                    li.style.marginBottom = '10px';
                     li.onclick = () => {
                         document.getElementById('message-input').value = question;
                         closePreviousQuestionsModal();
@@ -798,6 +926,31 @@
                     addMessage("您好！我是医疗AI助手，请问有什么可以帮助您的？", 'ai');
                 }
             }
+            // 重新回答最后一个问题
+            function redirectToLastQuestion() {
+                if (previousQuestions.length === 0) {
+                    alert('暂无历史问题可供重新回答');
+                    return;
+                }
+
+                // 获取最后一个问题
+                const lastQuestion = previousQuestions[previousQuestions.length - 1];
+
+                // 创建并触发发送事件
+                const inputEvent = new Event('input', { bubbles: true });
+                const sendEvent = new Event('click', { bubbles: true });
+
+                // 设置输入框内容
+                const messageInput = document.getElementById('message-input');
+                messageInput.value = lastQuestion;
+
+                // 触发输入事件更新状态
+                messageInput.dispatchEvent(inputEvent);
+
+                // 触发发送按钮点击
+                document.getElementById('send-button').dispatchEvent(sendEvent);
+            }
+
         </script>
     </div>
 </body>
