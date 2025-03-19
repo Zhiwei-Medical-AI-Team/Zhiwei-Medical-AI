@@ -581,7 +581,7 @@
         <div class="chat-container">
             <div class="chat-header">
                 <button class="header-button" onclick="redirectToSomePage()">
-                    <i class="fas fa-arrow-left"></i> 返回
+                    <span class="fas fa-arrow-left">返回</span>
                 </button>
                 和“智微医道”对话
             </div>
@@ -709,7 +709,7 @@
                     console.log('用户回答：', userAnswers);
 
                     // 拼接用户回答
-                    const formattedResponse = `我是一名${userAnswers[0]}岁的${userAnswers[1]}，我的症状是${userAnswers[2]}，我的过敏史或病史为${userAnswers[3]}，请根据我提供的信息给出合理的医疗建议。`;
+                    const formattedResponse = `我是一名${userAnswers[0]}岁的${userAnswers[1]}性，我的症状是${userAnswers[2]}，我的过敏史或病史为${userAnswers[3]}，请根据我提供的信息给出合理的医疗建议。`;
 
                     // 将拼接后的句子放入聊天输入框
                     const messageInput = document.getElementById('message-input');
@@ -795,17 +795,17 @@
                 const typingIndicator = document.getElementById('typing-indicator');
 
                 // Sample responses database - you would replace this with actual API calls
-                const sampleResponses = [
-                    "I'm an AI assistant. How can I help you today?",
-                    "That's an interesting question. Let me think about that...",
-                    "I understand your question. Here's what I know about this topic...",
-                    "Could you provide more details about your question?",
-                    "Based on my knowledge, there are several approaches to this problem.",
-                    "I'd be happy to help you with that! Let me explain...",
-                    "That's a complex topic. Let me break it down for you...",
-                    "Thank you for sharing that information. Here's my perspective...",
-                    "I appreciate your patience. Here's what I've found on this subject..."
-                ];
+                // const sampleResponses = [
+                //     "I'm an AI assistant. How can I help you today?",
+                //     "That's an interesting question. Let me think about that...",
+                //     "I understand your question. Here's what I know about this topic...",
+                //     "Could you provide more details about your question?",
+                //     "Based on my knowledge, there are several approaches to this problem.",
+                //     "I'd be happy to help you with that! Let me explain...",
+                //     "That's a complex topic. Let me break it down for you...",
+                //     "Thank you for sharing that information. Here's my perspective...",
+                //     "I appreciate your patience. Here's what I've found on this subject..."
+                // ];
 
                 // Add welcome message when page loads
                 addMessage(" 您好！我是医疗AI助手，请问有什么可以帮助您的？", 'ai');
@@ -904,30 +904,30 @@
                     return text;
                 }
 
-                // Function to get AI response - in a real app, this would call an API
-                function getAIResponse(userMessage) {
-                    // This is where you would integrate with an actual AI API
-                    // For now, we'll use keyword matching for demo purposes
-                    userMessage = userMessage.toLowerCase();
+                // // Function to get AI response - in a real app, this would call an API
+                // function getAIResponse(userMessage) {
+                //     // This is where you would integrate with an actual AI API
+                //     // For now, we'll use keyword matching for demo purposes
+                //     userMessage = userMessage.toLowerCase();
 
-                    if (userMessage.includes('hello') || userMessage.includes('hi')) {
-                        return "Hello there! How can I assist you today?";
-                    } else if (userMessage.includes('help')) {
-                        return "I'm here to help! Feel free to ask me questions about any topic.";
-                    } else if (userMessage.includes('thank')) {
-                        return "You're welcome! Is there anything else I can help with?";
-                    } else if (userMessage.includes('how are you')) {
-                        return "I'm functioning well, thank you for asking! How about you?";
-                    } else if (userMessage.includes('bye')) {
-                        return "Goodbye! Feel free to return if you have more questions.";
-                    } else if (userMessage.length < 10) {
-                        return "Could you elaborate more on that? I'd like to understand your question better.";
-                    } else {
-                        // Get a random response for other queries
-                        const randomIndex = Math.floor(Math.random() * sampleResponses.length);
-                        return sampleResponses[randomIndex];
-                    }
-                }
+                //     if (userMessage.includes('hello') || userMessage.includes('hi')) {
+                //         return "Hello there! How can I assist you today?";
+                //     } else if (userMessage.includes('help')) {
+                //         return "I'm here to help! Feel free to ask me questions about any topic.";
+                //     } else if (userMessage.includes('thank')) {
+                //         return "You're welcome! Is there anything else I can help with?";
+                //     } else if (userMessage.includes('how are you')) {
+                //         return "I'm functioning well, thank you for asking! How about you?";
+                //     } else if (userMessage.includes('bye')) {
+                //         return "Goodbye! Feel free to return if you have more questions.";
+                //     } else if (userMessage.length < 10) {
+                //         return "Could you elaborate more on that? I'd like to understand your question better.";
+                //     } else {
+                //         // Get a random response for other queries
+                //         const randomIndex = Math.floor(Math.random() * sampleResponses.length);
+                //         return sampleResponses[randomIndex];
+                //     }
+                // }
 
                 // Focus the input field when the page loads
                 messageInput.focus();
