@@ -169,12 +169,12 @@
       line-height: 1.5;
     }
 
-    输入框容器
+    /* 输入框容器 */
     .input-group {
       margin-bottom: 24px;
     }
 
-    输入框样式
+    /* 输入框样式 */
     .answer-input {
       width: 70%;
       padding: 12px;
@@ -709,7 +709,7 @@
           console.log('用户回答：', userAnswers);
 
           // 拼接用户回答
-          const formattedResponse = `我是一名${userAnswers[0]}岁的${userAnswers[1]}，我的症状是${userAnswers[2]}，我的过敏史或病史为${userAnswers[3]}，请根据我提供的信息给出合理的医疗建议。`;
+          const formattedResponse = `我是一名${userAnswers[0]}岁的${userAnswers[1]}性，我的症状是${userAnswers[2]}，我的过敏史或病史为${userAnswers[3]}，请根据我提供的信息给出合理的医疗建议。`;
 
           // 将拼接后的句子放入聊天输入框
           const messageInput = document.getElementById('message-input');
