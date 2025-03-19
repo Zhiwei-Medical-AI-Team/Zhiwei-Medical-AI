@@ -40,7 +40,7 @@
             width: 400px;
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            padding: 24px;
+            padding: 28px;
             position: relative;
             animation: slideIn 0.3s ease-out;
         }
@@ -177,7 +177,7 @@
         /* 输入框样式 */
         .answer-input {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             background: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
@@ -659,10 +659,11 @@
         <script>
             // 问题数据
             const questions = [
-                { title: "第1题：基础信息", text: "请简单介绍一下你自己" },
-                { title: "第2题：兴趣爱好", text: "你的主要兴趣爱好是什么？" },
-                { title: "第3题：使用目的", text: "你希望在这里获得什么？" },
-                { title: "第4题：完成", text: "感谢参与！" }
+                { title: "第1题：", text: "请输入您的年龄" },
+                { title: "第2题：", text: "请填写您的性别" },
+                { title: "第3题：", text: "请描述您的症状" },
+                { title: "第4题：", text: "请填写您的过敏史或者病史" },
+                // { title: "第5题：", text: "感谢参与！" }
             ];
 
             let currentQuestionIndex = 0; // 当前问题索引
@@ -690,7 +691,7 @@
 
                 // 最后一题隐藏输入框
                 if (currentQuestionIndex === questions.length - 1) {
-                    answerInput.style.display = 'none';
+                    answerInput.style.display = 'block';
                 } else {
                     answerInput.style.display = 'block';
                 }
@@ -706,6 +707,15 @@
                 } else {
                     overlay.style.display = 'none';
                     console.log('用户回答：', userAnswers);
+
+                    // 拼接用户回答
+                    const formattedResponse = `我是一名${userAnswers[0]}岁的${userAnswers[1]}，我的症状是${userAnswers[2]}，我的过敏史或病史为${userAnswers[3]}，请根据我提供的信息给出合理的医疗建议。`;
+
+                    // 将拼接后的句子放入聊天输入框
+                    const messageInput = document.getElementById('message-input');
+                    messageInput.value = formattedResponse;
+
+                    // 不自动发送，仅放入输入框
                 }
             }
 
@@ -816,22 +826,22 @@
                     // 将用户的问题存储到之前的问题列表中
                     previousQuestions.push(messageText);
 
-                    // Add user message to conversation
+                    // 添加用户消息到聊天对话框
                     addMessage(messageText, 'user');
                     messageInput.value = '';
 
-                    // Show typing indicator
+                    // 显示“正在输入”提示
                     typingIndicator.style.display = 'block';
                     conversationContainer.scrollTop = conversationContainer.scrollHeight;
 
-                    // Simulate AI response delay
+                    // 模拟 AI 回复延迟
                     setTimeout(() => {
-                        // Hide typing indicator
+                        // 隐藏“正在输入”提示
                         typingIndicator.style.display = 'none';
 
-                        // In a real app, you would call your AI API here
-                        // For demo purposes, we'll use a random sample response
-                        const aiResponse = getAIResponse(messageText);
+                        // 在实际应用中，这里会调用 AI API
+                        // 这里使用一个固定的回复作为示例
+                        const aiResponse = "感谢您提供的信息！根据您的描述，建议您尽快就医，并注意休息。如果需要进一步的帮助，请随时告诉我。";
                         addMessage(aiResponse, 'ai');
                     }, 1500);
                 }
