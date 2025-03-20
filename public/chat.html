@@ -1,16 +1,15 @@
-<!-- 848行为聊天头像 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>对话</title>
+    <title>和“智微医道”对话</title>
     <link rel="icon" type="image/x-icon" href="image/favicon.ico">
     <style>
         /* 全局样式 */
         body {
-            background-image: url("image/BG.png");
+            background-image: url("image/BG.webp");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -121,7 +120,7 @@
             padding: 0;
             margin: 0;
             overflow-y: auto;
-            /* 启用垂直滚动条 */
+            /* 垂直滚动条 */
             max-height: 60vh;
             /* 设置列表的最大高度 */
             flex: 1;
@@ -150,9 +149,6 @@
             background-color: #d0d0d0;
         }
 
-
-        /* 其他样式保持不变 */
-        /* ...（省略其他样式代码）... */
         /* 标题样式 */
         .dialog-title {
             color: #000000;
@@ -174,7 +170,7 @@
             margin-bottom: 24px;
         }
 
-        /* 输入框样式 */
+        /* 输入框样式（修改width可以更改输入框长度，电脑93%最合适） */
         .answer-input {
             width: 93%;
             padding: 12px;
@@ -244,6 +240,7 @@
             background: #2d7cc7;
         }
 
+        /* 暂不确定是否影响 */
         /* * {
       margin: 0;
       padding: 0;
@@ -283,6 +280,7 @@
             background-color: white;
         }
 
+        /* 占位盒子：左中右 */
         .aa {
             display: flex;
             flex-direction: row;
@@ -412,7 +410,7 @@
             align-self: flex-start;
         }
 
-        /* 删除或注释掉以下样式 */
+        /* 头像样式 */
         .avatar {
             width: 40px;
             height: 40px;
@@ -452,7 +450,7 @@
             background-color: #f5f0ff;
         }
 
-        /* Input area styling */
+        /* 输入框样式 */
         .input-container {
             display: flex;
             padding: 15px;
@@ -497,7 +495,7 @@
             transform: scale(0.95);
         }
 
-        /* Typing indicator animation */
+        /* 打字指示器动画 */
         .typing-indicator {
             display: none;
             align-self: flex-start;
@@ -542,7 +540,7 @@
             }
         }
 
-        /* Responsiveness for mobile devices */
+        /* 适配手机 */
         @media (max-width: 768px) {
             .aa {
                 flex-direction: column;
@@ -573,7 +571,7 @@
     <div class="aa">
         <div class="bb">
             <div class="bbbb">
-                <!-- <img src="image/卡通人物.png" width="200px"> -->
+                <!-- 占位用的盒子 -->
             </div>
         </div>
 
@@ -583,7 +581,7 @@
                 <button class="header-button" onclick="redirectToSomePage()">
                     <span class="fas fa-arrow-left">返回</span>
                 </button>
-                和“智微医道”对话
+                智微医道
             </div>
             <div class="conversation-container" id="conversation">
                 <!-- 聊天内容将动态添加到这里 -->
@@ -634,15 +632,14 @@
         <div id="instruction-modal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
-                <p> 智微医道精通多个关键领域，在疾病诊断方面，无论是常见疾病如感冒、咳嗽的
-                    症状判断，还是复杂病症如心血管疾病、肿瘤相关知识，它都能依据症状表现辅助分析可能病因
-                    ；在药物信息层面，对于各类药物的功效、用法用量、副作用以及药物相互作用等内容都能详细解答。
+                <p><strong>介绍：</strong></p>
+                <p> 智微医道精通多个关键领域，在疾病诊断方面，无论是常见疾病如感冒、咳嗽的症状判断，还是复杂病症如心血管疾病、肿瘤相关知识，它都能依据症状表现辅助分析可能病因；在药物信息层面，对于各类药物的功效、用法用量、副作用以及药物相互作用等内容都能详细解答。
                 </p>
-                <p>下面是功能介绍：</p>
-                <p><strong>1：</strong> 我最近感觉头痛，怎么办？</p>
-                <p><strong>2：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
-                <p><strong>3：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
-                <p><strong>4：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
+                <p><strong>使用示范：</strong></p>
+                <p><strong>用户：</strong> 我最近感觉头痛，怎么办？</p>
+                <p><strong>AI：</strong> 头痛可能由多种原因引起，建议您先休息一下，如果症状持续，请及时就医。</p>
+                <p><strong>用户：</strong> 我感冒了怎么办？</p>
+                <p><strong>AI：</strong> 多喝水、多休息，若症状严重可服用对症药物，若持续不好转或伴有高热等严重症状应及时就医。</p>
             </div>
         </div>
         <!-- 引用之前的问题弹窗 -->
@@ -657,13 +654,12 @@
         </div>
 
         <script>
-            // 问题数据
+            // 问题数据（可直接添加新问题）
             const questions = [
-                { title: "第1题：", text: "请输入您的年龄" },
-                { title: "第2题：", text: "请填写您的性别" },
-                { title: "第3题：", text: "请描述您的症状" },
-                { title: "第4题：", text: "请填写您的过敏史或者病史" },
-                // { title: "第5题：", text: "感谢参与！" }
+                { title: "第一题：", text: "请输入您的年龄（输入纯数字即可）" },
+                { title: "第二题：", text: "请填写您的性别（填“男”或“女”）" },
+                { title: "第三题：", text: "请描述您的症状" },
+                { title: "第四题：", text: "请填写您的过敏史或者病史（没有则填“无”）" },
             ];
 
             let currentQuestionIndex = 0; // 当前问题索引
@@ -691,10 +687,7 @@
 
                 // 最后一题隐藏输入框
                 if (currentQuestionIndex === questions.length - 1) {
-                    answerInput.style.display = 'block';
-                } else {
-                    answerInput.style.display = 'block';
-                }
+                    answerInput.style.display = 'block';}
             }
 
             // 下一步逻辑
@@ -709,7 +702,7 @@
                     console.log('用户回答：', userAnswers);
 
                     // 拼接用户回答
-                    const formattedResponse = `我是一名${userAnswers[0]}岁的${userAnswers[1]}性，我的症状是${userAnswers[2]}，我的过敏史或病史为${userAnswers[3]}，请根据我提供的信息给出合理的医疗建议。`;
+                    const formattedResponse = `我是一名${userAnswers[0]}岁的${userAnswers[1]}性，我的症状是${userAnswers[2]}，我的过敏史或病史为${userAnswers[3]}，请根据我提供的信息给出医疗分析和建议。`;
 
                     // 将拼接后的句子放入聊天输入框
                     const messageInput = document.getElementById('message-input');
@@ -794,19 +787,6 @@
                 const sendButton = document.getElementById('send-button');
                 const typingIndicator = document.getElementById('typing-indicator');
 
-                // Sample responses database - you would replace this with actual API calls
-                // const sampleResponses = [
-                //     "I'm an AI assistant. How can I help you today?",
-                //     "That's an interesting question. Let me think about that...",
-                //     "I understand your question. Here's what I know about this topic...",
-                //     "Could you provide more details about your question?",
-                //     "Based on my knowledge, there are several approaches to this problem.",
-                //     "I'd be happy to help you with that! Let me explain...",
-                //     "That's a complex topic. Let me break it down for you...",
-                //     "Thank you for sharing that information. Here's my perspective...",
-                //     "I appreciate your patience. Here's what I've found on this subject..."
-                // ];
-
                 // Add welcome message when page loads
                 addMessage(" 您好！我是医疗AI助手，请问有什么可以帮助您的？", 'ai');
 
@@ -856,7 +836,7 @@
 
                     // 创建图片元素
                     const imgElement = document.createElement('img');
-                    imgElement.src = sender === 'user' ? 'image/user-avatar.png' : 'image/AI-avatar.png';
+                    imgElement.src = sender === 'user' ? 'image/user-avatar.webp' : 'image/AI-avatar.webp';
                     imgElement.alt = sender === 'user' ? 'User Avatar' : 'AI Avatar';
                     imgElement.style.width = '40px';
                     imgElement.style.height = '40px';
@@ -903,31 +883,6 @@
 
                     return text;
                 }
-
-                // // Function to get AI response - in a real app, this would call an API
-                // function getAIResponse(userMessage) {
-                //     // This is where you would integrate with an actual AI API
-                //     // For now, we'll use keyword matching for demo purposes
-                //     userMessage = userMessage.toLowerCase();
-
-                //     if (userMessage.includes('hello') || userMessage.includes('hi')) {
-                //         return "Hello there! How can I assist you today?";
-                //     } else if (userMessage.includes('help')) {
-                //         return "I'm here to help! Feel free to ask me questions about any topic.";
-                //     } else if (userMessage.includes('thank')) {
-                //         return "You're welcome! Is there anything else I can help with?";
-                //     } else if (userMessage.includes('how are you')) {
-                //         return "I'm functioning well, thank you for asking! How about you?";
-                //     } else if (userMessage.includes('bye')) {
-                //         return "Goodbye! Feel free to return if you have more questions.";
-                //     } else if (userMessage.length < 10) {
-                //         return "Could you elaborate more on that? I'd like to understand your question better.";
-                //     } else {
-                //         // Get a random response for other queries
-                //         const randomIndex = Math.floor(Math.random() * sampleResponses.length);
-                //         return sampleResponses[randomIndex];
-                //     }
-                // }
 
                 // Focus the input field when the page loads
                 messageInput.focus();
